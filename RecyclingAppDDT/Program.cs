@@ -16,30 +16,14 @@ namespace RecyclingAppDDT
             float globaltax = 0.15f;
             string reTypeString = "";
 
-            List<string> reType = new List<string>() { "Glass ($2.5p/kg)", "Plastic ($2.5p/kg)", "Cardboard ($2.5p/kg", "Tin ($3p/kg)" }; //List
+            List<string> reType = new List<string>() { "Glass ", "Plastic ", "Cardboard ", "Tin " }; //List
             List<float> reTypePrice = new List<float>() { 2.5f, 3.90f, 2.5f, 3 }; //Prices
 
             Console.WriteLine("Please Choose the TYPE of Recycling you want to dump:\n");
             
-            chosenIndex = MenuChoice("Type", reType); //Displaying the List
-            if (chosenIndex == 0)
-            {
-                reTypeString = "Glass, ";
-            }
-            if (chosenIndex == 1)
-            {
-                reTypeString = "Plastic, ";
-            }
-            if (chosenIndex == 2)
-            {
-                reTypeString = "Cardboard, ";
-            }
-            if (chosenIndex == 3)
-            {
-                reTypeString = "Tin, ";
-            }
+            chosenIndex = MenuChoice("Type", reType, reTypePrice); //Displaying the List
 
-            totalReTypes = totalReTypes + reTypeString;
+            totalReTypes = totalReTypes + reType[chosenIndex]; //Adding to Global
 
             float weight = CheckFloat(); //Asking for weight
             totalWeight = totalWeight + weight;
@@ -66,33 +50,32 @@ namespace RecyclingAppDDT
             Console.Clear();
 
             //Displaying Totals
-            Console.WriteLine($"Recycling Type: {reTypeString}\n" +
-                $"The weight of your dumped {reTypeString} is {weight}kg\n" +
+            Console.WriteLine($"Recycling Type: {reType[chosenIndex]}\n" +
+                $"The weight of your dumped {reTypeString}is {weight}kg\n" +
                 "Totals:\n" +
                 $"\tTax: ${globaltax}\n" +
                 $"\tTotal Tax: ${tax}\n" +
                 $"\tDump Price (Before Tax): ${dumpPrice}\n" +
                 $"\tDump Price (After Tax): ${totalTax}\n");
-
         }
-
-        static int MenuChoice(string menuType, List<string> listData)
+        //Supporting Methods
+        static int MenuChoice(string menuType, List<string> typeData, List<float> priceData)
         {
 
 
-            string menu = GenerateMenu(menuType, listData);
+            string menu = GenerateMenu(menuType, typeData, priceData);
 
-            return CheckInt(menu, 1, listData.Count) - 1;
+            return CheckInt(menu, 1, typeData.Count) - 1;
         }
-        static string GenerateMenu(string menuType, List<string> listData)
+        static string GenerateMenu(string menuType, List<string> typeData, List<float> priceData)
         {
 
 
             string menu = $"Select the {menuType}:\n";
 
-            for (int loop = 0; loop < listData.Count; loop++)
+            for (int loop = 0; loop < typeData.Count; loop++)
             {
-                menu += $"{loop + 1}. {listData[loop]}\n";
+                menu += $"{loop + 1}. {typeData[loop]} (${priceData[loop]}\\kg)\n";
             }
 
             return menu;
@@ -110,16 +93,12 @@ namespace RecyclingAppDDT
                     if (userInt >= min && userInt <= max)
                     {
                         return userInt;
-                    }
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"ERROR: You must enter a number between {min} and {max}");
-                    Console.ForegroundColor= ConsoleColor.White;
+                    }                   
+                    DisplayErrorMessage($"ERROR: You must enter a number between {min} and {max}");                   
                 }
                 catch
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"ERROR: You must enter a number between {min} and {max}");
-                    Console.ForegroundColor = ConsoleColor.White;
+                {                   
+                    DisplayErrorMessage($"ERROR: You must enter a number between {min} and {max}");
                 }
 
 
@@ -140,15 +119,11 @@ namespace RecyclingAppDDT
                     {
                         return userFloat;
                     }
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"ERROR: You must enter a number");
-                    Console.ForegroundColor= ConsoleColor.White;
+                    DisplayErrorMessage($"ERROR: You must enter a number");
                 }
                 catch
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"ERROR: You must enter a number");
-                    Console.ForegroundColor= ConsoleColor.White;
+                    DisplayErrorMessage($"ERROR: You must enter a number");
                 }
             }
         }
@@ -170,7 +145,13 @@ namespace RecyclingAppDDT
                 }
             }
         }
-      
+        private static void DisplayErrorMessage(string error)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(error);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        //Main
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -179,8 +160,9 @@ namespace RecyclingAppDDT
                 "|  '--'.'| .-. :| .--' \\  '  /| .--'|  |,--.|      \\| .-. |    |  .-.  || .-. || .-. | \n" +
                 "|  |\\  \\ \\   --.\\ `--.  \\   ' \\ `--.|  ||  ||  ||  |' '-' '    |  | |  || '-' '| '-' ' \n" +
                 "`--' '--' `----' `---'.-'  /   `---'`--'`--'`--''--'.`-  /     `--' `--'|  |-' |  |-'  \n" +
-                "                      `---'                         `---'               `--'   `--'    \n"
-                ); //Replace later (Ascii art Gen)
+                "                      `---'                         `---'               `--'   `--'    \n" +
+                "---------------------------------------------------------------------------------------"
+                ); //title
             Console.ForegroundColor= ConsoleColor.White;
 
             Console.WriteLine("Please follow the programs prompts:");
@@ -188,18 +170,18 @@ namespace RecyclingAppDDT
             string proceed = "";
             while (proceed.Equals(""))
             {
-                UiTrash();
+                UiTrash(); //Calling the Secondary method
 
                 proceed = CheckProceed();
             }
-            
+            //Total Totals
             Console.WriteLine($"The type/s you chose to dump were: {totalReTypes}\n" +
             $"The total weight of all items to dump is: {totalWeight}kg\n" +
             $"The amount to dump in total is ${fullTotal}\n");
 
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Press <ENTER> to end the program");
-            Console.ForegroundColor = ConsoleColor.White;
+          
+            DisplayErrorMessage("Press <ENTER> to end the program");
+            
 
             Console.ReadLine();
             Console.Clear();
