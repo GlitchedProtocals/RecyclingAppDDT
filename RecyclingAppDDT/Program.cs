@@ -9,7 +9,7 @@ namespace RecyclingAppDDT
         static float fullTotal = 0;
         static string totalReTypes = "";
         static float totalWeight = 0;
-        
+        //Secondary Method
         static void UiTrash()
         {
             int chosenIndex;
@@ -32,7 +32,7 @@ namespace RecyclingAppDDT
 
             Console.WriteLine($"The weight of your recycling is {weight}kg and it's cost is ${reTypePrice[chosenIndex]} per kg");
 
-            if (weight > 20) //if the weight is over 20kg you get discount
+            if (weight >= 20) //if the weight is over 20kg you get discount
             {
                 dumpPrice = dumpPrice * 0.2f;
                 Console.WriteLine("\tAdded 20% discount\n");
