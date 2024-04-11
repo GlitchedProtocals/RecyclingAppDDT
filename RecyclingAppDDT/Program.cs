@@ -22,9 +22,9 @@ namespace RecyclingAppDDT
             Console.WriteLine("Please Choose the TYPE of Recycling you want to dump:\n");
             
             chosenIndex = MenuChoice("Type", reType, reTypePrice); //Displaying the List
-
             totalReTypes = totalReTypes + reType[chosenIndex]; //Adding to Global
-
+            Console.Clear();
+            
             float weight = CheckFloat(); //Asking for weight
             totalWeight = totalWeight + weight;
 
@@ -44,7 +44,7 @@ namespace RecyclingAppDDT
             float totalTax = dumpPrice + tax;
 
             fullTotal += totalTax;
-
+          
             Console.WriteLine("Press <ENTER> to finalize prices\n");
             Console.ReadLine();
             Console.Clear();
@@ -136,7 +136,7 @@ namespace RecyclingAppDDT
                 Console.ForegroundColor = ConsoleColor.White;
 
                 string checkProceed = Console.ReadLine();
-
+                Console.Clear();
                 checkProceed = checkProceed.ToUpper();
 
                 if (checkProceed.Equals("") || checkProceed.Equals("X")) //this || means or
@@ -165,7 +165,11 @@ namespace RecyclingAppDDT
                 ); //title
             Console.ForegroundColor= ConsoleColor.White;
 
-            Console.WriteLine("Please follow the programs prompts:");
+            Console.WriteLine("Welcome to the Recycling APP\n" +
+                "Please follow the programs prompts:\n" +
+                "Press <ENTER> To Begin\n");
+            Console.ReadLine();
+            Console.Clear();
 
             string proceed = "";
             while (proceed.Equals(""))
@@ -175,9 +179,9 @@ namespace RecyclingAppDDT
                 proceed = CheckProceed();
             }
             //Total Totals
-            Console.WriteLine($"The type/s you chose to dump were: {totalReTypes}\n" +
-            $"The total weight of all items to dump is: {totalWeight}kg\n" +
-            $"The amount to dump in total is ${fullTotal}\n");
+            Console.WriteLine($"The type/s you chose to dump were:\n{totalReTypes}\n" +
+            $"The total weight of all items to dump is:\n{totalWeight}kg\n" +
+            $"The amount to dump in total is \n${fullTotal}\n");
 
           
             DisplayErrorMessage("Press <ENTER> to end the program");
