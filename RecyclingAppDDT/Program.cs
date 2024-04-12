@@ -19,7 +19,7 @@ namespace RecyclingAppDDT
             List<string> reType = new List<string>() { "Glass ", "Plastic ", "Cardboard ", "Tin " }; //List
             List<float> reTypePrice = new List<float>() { 2.5f, 3.90f, 2.5f, 3 }; //Prices
 
-            Console.WriteLine("Please Choose the TYPE of Recycling you want to dump:\n");
+            Console.WriteLine("Please Choose the TYPE of Recycling you want to dump (1-4):\n");
             
             chosenIndex = MenuChoice("Type", reType, reTypePrice); //Displaying the List
             totalReTypes = totalReTypes + reType[chosenIndex]; //Adding to Global
@@ -105,7 +105,7 @@ namespace RecyclingAppDDT
             }
 
         }
-        static float CheckFloat(int min = 0, int max = 999999)
+        static float CheckFloat(int min = 0, int max = 999999999)
         {
             while (true)
             {
