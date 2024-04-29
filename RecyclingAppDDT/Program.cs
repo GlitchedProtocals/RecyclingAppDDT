@@ -144,6 +144,7 @@ namespace RecyclingAppDDT
                 {
                     return checkProceed;
                 }
+                DisplayErrorMessage("ERROR: Invalid Response");
             }
         }
         private static void DisplayErrorMessage(string error)
