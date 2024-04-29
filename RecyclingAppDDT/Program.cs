@@ -5,6 +5,7 @@ namespace RecyclingAppDDT
 {
     internal class Program
     {
+        //Final Code - Recycling App
         //Global Variables
         static float fullTotal = 0;
         static string totalReTypes = "";
