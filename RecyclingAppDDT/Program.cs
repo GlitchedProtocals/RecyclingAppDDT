@@ -60,6 +60,7 @@ namespace RecyclingAppDDT
                 $"\tDump Price (After Tax): ${totalTax}\n");
         }
         //Supporting Methods
+        //Displaying Menu
         static int MenuChoice(string menuType, List<string> typeData, List<float> priceData)
         {
 
@@ -68,6 +69,7 @@ namespace RecyclingAppDDT
 
             return CheckInt(menu, 1, typeData.Count) - 1;
         }
+        //Generating Menu
         static string GenerateMenu(string menuType, List<string> typeData, List<float> priceData)
         {
 
@@ -81,6 +83,7 @@ namespace RecyclingAppDDT
 
             return menu;
         }
+        //Checking Int
         static int CheckInt(string question, int min, int max)
         {
             while (true)
@@ -106,6 +109,7 @@ namespace RecyclingAppDDT
             }
 
         }
+        //Checking parameters for Weight
         static float CheckFloat(int min = 0, int max = 999999999)
         {
             while (true)
@@ -128,6 +132,7 @@ namespace RecyclingAppDDT
                 }
             }
         }
+        //Giving the user the option to add more info
         static string CheckProceed()
         {
             while (true)
@@ -147,6 +152,7 @@ namespace RecyclingAppDDT
                 DisplayErrorMessage("ERROR: Invalid Response");
             }
         }
+        //Displaying the Error Message
         private static void DisplayErrorMessage(string error)
         {
             Console.ForegroundColor = ConsoleColor.Red;
