@@ -17,21 +17,23 @@ namespace RecyclingAppDDT
             float globaltax = 0.15f;
             string reTypeString = "";
 
-            List<string> reType = new List<string>() { "Glass ", "Plastic ", "Cardboard ", "Tin " }; //List
-            List<float> reTypePrice = new List<float>() { 2.5f, 3.90f, 2.5f, 3 }; //Prices
+            List<string> RETYPE = new List<string>() { "Glass ", "Plastic ", "Cardboard ", "Tin " }; //List
+            RETYPE.AsReadOnly();
+            List<float> RETYPEPRICE = new List<float>() { 2.5f, 3.90f, 2.5f, 3 }; //Prices
+            RETYPEPRICE.AsReadOnly();
 
             Console.WriteLine("Please Choose the TYPE of Recycling you want to dump (1-4):\n");
             
-            chosenIndex = MenuChoice("Type", reType, reTypePrice); //Displaying the List
-            totalReTypes = totalReTypes + reType[chosenIndex]; //Adding to Global
+            chosenIndex = MenuChoice("Type", RETYPE, RETYPEPRICE); //Displaying the List
+            totalReTypes = totalReTypes + RETYPE[chosenIndex]; //Adding to Global
             Console.Clear();
             
             float weight = CheckFloat(); //Asking for weight
             totalWeight = totalWeight + weight;
 
-            float dumpPrice = weight * reTypePrice[chosenIndex]; //The Weight times the Recycling Type
+            float dumpPrice = weight * RETYPEPRICE[chosenIndex]; //The Weight times the Recycling Type
 
-            Console.WriteLine($"The weight of your recycling is {weight}kg and it's cost is ${reTypePrice[chosenIndex]} per kg");
+            Console.WriteLine($"The weight of your recycling is {weight}kg and it's cost is ${RETYPEPRICE[chosenIndex]} per kg");
 
             if (weight >= 20) //if the weight is over 20kg you get discount
             {
@@ -51,7 +53,7 @@ namespace RecyclingAppDDT
             Console.Clear();
 
             //Displaying Totals
-            Console.WriteLine($"Recycling Type: {reType[chosenIndex]}\n" +
+            Console.WriteLine($"Recycling Type: {RETYPE[chosenIndex]}\n" +
                 $"The weight of your dumped {reTypeString}is {weight}kg\n" +
                 "Totals:\n" +
                 $"\tTax: ${globaltax}\n" +
